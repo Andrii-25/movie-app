@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import "./App.css";
 import { getPopularMovies } from "./actions/movies";
 import Header from "./components/Header";
+import AppLayout from "./components/AppLayout";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <AppLayout>Hello World!</AppLayout>
     </div>
   );
 }
