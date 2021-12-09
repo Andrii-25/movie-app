@@ -5,12 +5,25 @@ import Header from "./Header";
 
 export default function AppLayout({ children }) {
   const StyledLayout = styled(Layout)`
-    height: 100vh;
+    height: 100%;
+    display: flex;
+    background-color: #324551;
+  `;
+
+  const StyledContent = styled(Content)`
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    background-color: #f0f2f5;
+    margin-left: 10%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-radius: 5px;
   `;
   return (
     <StyledLayout>
       <Header />
-      <Content className="site-layout-background">{children}</Content>
+      <StyledContent>{children}</StyledContent>
     </StyledLayout>
   );
 }
