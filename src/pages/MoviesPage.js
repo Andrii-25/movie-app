@@ -1,4 +1,4 @@
-import { Space, Spin } from "antd";
+import { List } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPopularMovies } from "../actions/movies";
@@ -24,11 +24,13 @@ export default function MoviesPage() {
 
   return (
     <AppLayout>
-      <Space align="center" direction="vertical">
-        {movies.results.map((m) => {
-          return <Movie key={m.id} data={m} />;
-        })}
-      </Space>
+      <List
+        dataSource={movies.results}
+        itemLayout="vertical"
+        size="large"
+        renderItem={(item) => <Movie data={item} />}
+        loading={loading}
+      ></List>
     </AppLayout>
   );
 }
