@@ -26,8 +26,7 @@ export default function MovieDetails() {
     } catch (e) {
       console.log(e);
     } finally {
-      setTimeout(() => setLoading(false));
-      console.log(videos);
+      setLoading(false);
     }
   }, []);
 
@@ -68,16 +67,12 @@ export default function MovieDetails() {
 
   const imgUrl = `http://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-  function getVideoUrl() {
-    const trailer = findTrailer(videos)[0];
-    if (!trailer) {
+  function getVideoUrl(arr) {
+    const video = arr[Math.floor(Math.random() * arr.length)];
+    if (video === undefined) {
       return;
     }
-    return `https://www.youtube.com/embed/${trailer.key}`;
-  }
-
-  function findTrailer(arr) {
-    return arr.filter((v) => v.name.toLowerCase().match("trailer"));
+    return `https://www.youtube.com/embed/${video.key}`;
   }
 
   return (
@@ -126,11 +121,11 @@ export default function MovieDetails() {
               </Row>
             </Wrapper>
           </StyledSpace>
-          <TrailerTitle>Trailer</TrailerTitle>
+          <TrailerTitle>Video</TrailerTitle>
           <iframe
             width="800"
             height="500"
-            src={getVideoUrl()}
+            src={getVideoUrl(videos)}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
