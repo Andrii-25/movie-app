@@ -3,16 +3,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getMovie } from "../actions/movies";
-import { getVideos } from "../actions/videos";
 import AppLayout from "../components/AppLayout";
-import moviesService from "../service/moviesService";
+import MoviesService from "../service/moviesService";
 import styled from "styled-components";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies);
-  const videosData = useSelector((state) => state.videos);
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -20,22 +18,18 @@ export default function MovieDetails() {
     try {
       setLoading(true);
       await dispatch(getMovie(id));
-      const res = await moviesService.getVideos(id);
+      const res = await MoviesService.getVideos(id);
       setVideos(res.data.results);
-      console.log(videos);
       if (movie.error) {
         message.error(movie.error);
       }
     } catch (e) {
       console.log(e);
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false));
+      console.log(videos);
     }
   }, []);
-
-  function findTrailer() {
-    return videos.filter((v) => v.name.toLowerCase().match("official trailer"));
-  }
 
   const StyledSpace = styled(Space)`
     width: 95%;
@@ -77,6 +71,18 @@ export default function MovieDetails() {
   `;
 
   const imgUrl = `http://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+  function getVideoUrl() {
+    const trailer = findTrailer(videos)[0];
+    if (!trailer) {
+      return;
+    }
+    return `https://www.youtube.com/embed/${trailer.key}`;
+  }
+
+  function findTrailer(arr) {
+    return arr.filter((v) => v.name.toLowerCase().match("official trailer"));
+  }
 
   return (
     <AppLayout>
@@ -128,7 +134,7 @@ export default function MovieDetails() {
           <iframe
             width="800"
             height="500"
-            src={`https://www.youtube.com/embed/${findTrailer()[0].key}`}
+            src={getVideoUrl()}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

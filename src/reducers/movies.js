@@ -3,7 +3,6 @@ import {
   ERROR,
   GET_MOVIE,
   FILTER_MOVIES,
-  GET_VIDEOS,
 } from "../actions/types";
 
 const initialState = [];
@@ -18,8 +17,6 @@ function moviesReducer(state = initialState, action) {
       return payload;
     case FILTER_MOVIES:
       return state.filter((item) => item.title.toLowerCase().match(name));
-    case GET_VIDEOS:
-      return payload;
     case ERROR:
       return payload;
     default:
