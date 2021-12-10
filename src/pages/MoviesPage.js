@@ -1,4 +1,4 @@
-import { List } from "antd";
+import { List, message } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPopularMovies } from "../actions/movies";
@@ -14,6 +14,9 @@ export default function MoviesPage() {
     try {
       setLoading(true);
       await dispatch(getPopularMovies());
+      if (movies.error) {
+        message.error(movies.error);
+      }
       console.log(movies);
     } catch (e) {
       console.log(e);

@@ -1,10 +1,5 @@
-import { Card, Avatar, Rate, Space, Image, Button, Row } from "antd";
+import { Rate, Space, Image, Row } from "antd";
 import styled from "styled-components";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
 
 export default function Movie({ data }) {
   const imgUrl = `http://image.tmdb.org/t/p/w500${data.poster_path}`;

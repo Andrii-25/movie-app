@@ -1,4 +1,4 @@
-import { PageHeader, Input, Row, Tooltip, Button } from "antd";
+import { PageHeader, Input, Row, Tooltip, Button, message } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +24,7 @@ export default function Header({ isBack = false }) {
   `;
   const { Search } = Input;
   const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movies);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event) {
@@ -32,6 +33,9 @@ export default function Header({ isBack = false }) {
       const { target } = event;
       const { value } = target;
       await dispatch(filterMovies(value.toLowerCase()));
+      if (movies.error) {
+        message.error(movies.error);
+      }
     } catch (e) {
       console.log(e);
     } finally {
