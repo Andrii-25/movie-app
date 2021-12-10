@@ -1,20 +1,19 @@
 import { List } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPopularMovies, getMovie } from "../actions/movies";
+import { getPopularMovies } from "../actions/movies";
 import AppLayout from "../components/AppLayout";
 import Movie from "../components/Movie";
 
 export default function MoviesPage() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies) || [];
+  const movies = useSelector((state) => state.movies);
 
   useEffect(async () => {
     try {
       setLoading(true);
-      // await dispatch(getPopularMovies());
-      await dispatch(getMovie(580489));
+      await dispatch(getPopularMovies());
       console.log(movies);
     } catch (e) {
       console.log(e);
@@ -26,13 +25,12 @@ export default function MoviesPage() {
   return (
     <AppLayout>
       <List
-        dataSource={movies.results}
+        dataSource={movies}
         itemLayout="vertical"
         size="large"
         renderItem={(item) => <Movie data={item} />}
         loading={loading}
       ></List>
-      <Movie data={movies} />
     </AppLayout>
   );
 }

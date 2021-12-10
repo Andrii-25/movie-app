@@ -5,7 +5,7 @@ import Header from "./Header";
 
 export default function AppLayout({ children }) {
   const StyledLayout = styled(Layout)`
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     background-color: #324551;
   `;
@@ -19,6 +19,7 @@ export default function AppLayout({ children }) {
     margin-top: 25px;
     margin-bottom: 25px;
     border-radius: 5px;
+    padding-bottom: 25px;
   `;
   return (
     <StyledLayout>

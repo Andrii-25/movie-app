@@ -1,8 +1,11 @@
 import { PageHeader, Input, Row, Tooltip, Button } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { filterMovies } from "../actions/movies";
+import { useState } from "react";
 
-export default function Header({ isBack = false, loading = false }) {
+export default function Header({ isBack = false }) {
   const StyledPageHeader = styled(PageHeader)`
     height: 70px;
     background-color: #032541;
@@ -20,6 +23,21 @@ export default function Header({ isBack = false, loading = false }) {
     font-size: 25px;
   `;
   const { Search } = Input;
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(event) {
+    try {
+      setLoading(true);
+      const { target } = event;
+      const { value } = target;
+      await dispatch(filterMovies(value.toLowerCase()));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="site-page-header-ghost-wrapper">
       <StyledPageHeader
@@ -44,6 +62,8 @@ export default function Header({ isBack = false, loading = false }) {
             placeholder="Search movie..."
             loading={loading}
             enterButton
+            onPressEnter={handleSubmit}
+            maxLength={30}
           />,
         ]}
       ></StyledPageHeader>
