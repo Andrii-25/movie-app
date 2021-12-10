@@ -1,4 +1,5 @@
 import { Rate, Space, Image, Row } from "antd";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Movie({ data }) {
@@ -38,11 +39,15 @@ export default function Movie({ data }) {
 
   return (
     <StyledSpace>
-      <StyledImage width={170} height={240} src={imgUrl} />
+      <Link to={`movie/${data.id}`}>
+        <StyledImage width={170} height={240} src={imgUrl} preview={false} />
+      </Link>
       <Wrapper>
-        <h1>
-          {data.title}&nbsp;({data.release_date.substring(0, 4)})
-        </h1>
+        <Link to={`movie/${data.id}`}>
+          <h1>
+            {data.title}&nbsp;({data.release_date.substring(0, 4)})
+          </h1>
+        </Link>
         <br />
         <Row>
           <Overview>{data.overview}</Overview>

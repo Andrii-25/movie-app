@@ -11,6 +11,11 @@ class MoviesService {
       `movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=${process.env.REACT_APP_LANGUAGE}`
     );
   }
+  getVideos(id) {
+    return http.get(
+      `movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=${process.env.REACT_APP_LANGUAGE}`
+    );
+  }
 }
 
 export default new MoviesService();

@@ -2,6 +2,7 @@ import {
   GET_POPULAR_MOVIES,
   GET_MOVIE,
   FILTER_MOVIES,
+  GET_VIDEOS,
   ERROR,
 } from "../actions/types";
 import MoviesService from "../service/moviesService";
@@ -41,6 +42,21 @@ export const filterMovies = (name) => async (dispatch) => {
     dispatch({
       type: FILTER_MOVIES,
       name,
+    });
+  } catch (err) {
+    dispatch({
+      type: ERROR,
+      payload: { error: err.message },
+    });
+  }
+};
+
+export const getVideos = (id) => async (dispatch) => {
+  const res = await MoviesService.getVideos(id);
+  try {
+    dispatch({
+      type: GET_VIDEOS,
+      payload: res.data.results,
     });
   } catch (err) {
     dispatch({
