@@ -85,7 +85,7 @@ export default function MovieDetails() {
   }
 
   return (
-    <AppLayout>
+    <AppLayout isBack={true}>
       {loading ? (
         <Spin />
       ) : (

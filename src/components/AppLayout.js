@@ -3,7 +3,7 @@ import { Content } from "antd/lib/layout/layout";
 import styled from "styled-components";
 import Header from "./Header";
 
-export default function AppLayout({ children }) {
+export default function AppLayout({ children, isBack }) {
   const StyledLayout = styled(Layout)`
     min-height: 100vh;
     display: flex;
@@ -23,7 +23,7 @@ export default function AppLayout({ children }) {
   `;
   return (
     <StyledLayout>
-      <Header />
+      <Header isBack={isBack} />
       <StyledContent>{children}</StyledContent>
     </StyledLayout>
   );

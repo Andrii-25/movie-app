@@ -3,7 +3,8 @@ import { RollbackOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { filterMovies } from "../actions/movies";
-import { useState } from "react";
+import { useState, forceUpdate } from "react";
+import { Link } from "react-router-dom";
 
 export default function Header({ isBack = false }) {
   const StyledPageHeader = styled(PageHeader)`
@@ -45,16 +46,17 @@ export default function Header({ isBack = false }) {
   return (
     <div className="site-page-header-ghost-wrapper">
       <StyledPageHeader
-        onBack={() => window.history.back()}
         backIcon={false}
         title={
           <Row>
             {isBack ? (
               <Tooltip>
                 <Wrapper>
-                  <StyledButton type="text">
-                    <RollbackOutlined />
-                  </StyledButton>
+                  <Link to="/" onClick={() => forceUpdate()}>
+                    <StyledButton type="text">
+                      <RollbackOutlined />
+                    </StyledButton>
+                  </Link>
                 </Wrapper>
               </Tooltip>
             ) : null}
