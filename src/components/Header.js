@@ -31,9 +31,6 @@ export default function Header({ isBack = false }) {
   async function onSearch(value) {
     try {
       setLoading(true);
-      // const { target } = event;
-      // const { value } = target;
-      console.log(value);
       await dispatch(filterMovies(value.toLowerCase()));
       if (movies.error) {
         message.error(movies.error);
