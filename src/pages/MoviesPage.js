@@ -1,7 +1,7 @@
 import { List } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPopularMovies } from "../actions/movies";
+import { getPopularMovies, getMovie } from "../actions/movies";
 import AppLayout from "../components/AppLayout";
 import Movie from "../components/Movie";
 
@@ -13,7 +13,8 @@ export default function MoviesPage() {
   useEffect(async () => {
     try {
       setLoading(true);
-      await dispatch(getPopularMovies());
+      // await dispatch(getPopularMovies());
+      await dispatch(getMovie(580489));
       console.log(movies);
     } catch (e) {
       console.log(e);
@@ -31,6 +32,7 @@ export default function MoviesPage() {
         renderItem={(item) => <Movie data={item} />}
         loading={loading}
       ></List>
+      <Movie data={movies} />
     </AppLayout>
   );
 }
