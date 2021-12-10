@@ -59,10 +59,6 @@ export default function MovieDetails() {
   const Overview = styled.p`
     text-align: left;
     font-size: 17px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   `;
 
   const TrailerTitle = styled.h1`
@@ -81,13 +77,13 @@ export default function MovieDetails() {
   }
 
   function findTrailer(arr) {
-    return arr.filter((v) => v.name.toLowerCase().match("official trailer"));
+    return arr.filter((v) => v.name.toLowerCase().match("trailer"));
   }
 
   return (
     <AppLayout isBack={true}>
       {loading ? (
-        <Spin />
+        <Spin style={{ marginTop: "25%" }} />
       ) : (
         <>
           <StyledSpace>
