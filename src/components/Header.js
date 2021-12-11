@@ -1,28 +1,29 @@
+import { useState, forceUpdate } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { filterMovies } from "../actions/movies";
 import { PageHeader, Input, Row, Tooltip, Button, message } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { filterMovies } from "../actions/movies";
-import { useState, forceUpdate } from "react";
 import { Link } from "react-router-dom";
 
-export default function Header({ isBack = false }) {
-  const StyledPageHeader = styled(PageHeader)`
-    height: 70px;
-    background-color: #032541;
-  `;
+const StyledPageHeader = styled(PageHeader)`
+  height: 70px;
+  background-color: #032541;
+`;
 
-  const StyledH2 = styled.h2`
-    color: #1cb8d9;
-  `;
-  const Wrapper = styled.div`
-    height: 100%;
-    margin: -7px 15px 0 -15px;
-  `;
-  const StyledButton = styled(Button)`
-    color: white;
-    font-size: 25px;
-  `;
+const StyledH2 = styled.h2`
+  color: #1cb8d9;
+`;
+const Wrapper = styled.div`
+  height: 100%;
+  margin: -7px 15px 0 -15px;
+`;
+const StyledButton = styled(Button)`
+  color: white;
+  font-size: 25px;
+`;
+
+export default function Header({ isBack = false }) {
   const { Search } = Input;
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies);
@@ -36,7 +37,7 @@ export default function Header({ isBack = false }) {
         message.error(movies.error);
       }
     } catch (e) {
-      console.log(e);
+      message.error("Something went wrong...");
     } finally {
       setLoading(false);
     }

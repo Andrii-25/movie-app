@@ -1,11 +1,46 @@
-import { message, Space, Spin, Image, Row, Col, Rate } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getMovie } from "../actions/movies";
+import { message, Space, Spin, Image, Row, Col, Rate } from "antd";
+import styled from "styled-components";
 import AppLayout from "../components/AppLayout";
 import MoviesService from "../service/moviesService";
-import styled from "styled-components";
+
+const StyledSpace = styled(Space)`
+  width: 95%;
+  border-radius: 5px;
+  margin-top: 35px;
+`;
+
+const Wrapper = styled.div`
+  width: 725px;
+  height: 450px;
+  padding: 5px;
+`;
+
+const StyledCol = styled(Col)`
+  width: 50%;
+`;
+
+const StyledRow = styled(Row)`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledRate = styled(Rate)`
+  font-size: 30px;
+`;
+
+const Overview = styled.p`
+  text-align: left;
+  font-size: 17px;
+`;
+
+const TrailerTitle = styled.h1`
+  margin-top: 50px;
+  font-size: 30px;
+`;
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -24,46 +59,11 @@ export default function MovieDetails() {
         message.error(movie.error);
       }
     } catch (e) {
-      console.log(e);
+      message.error("Something went wrong...");
     } finally {
       setLoading(false);
     }
   }, []);
-
-  const StyledSpace = styled(Space)`
-    width: 95%;
-    border-radius: 5px;
-    margin-top: 35px;
-  `;
-
-  const Wrapper = styled.div`
-    width: 725px;
-    height: 450px;
-    padding: 5px;
-  `;
-
-  const StyledCol = styled(Col)`
-    width: 50%;
-  `;
-
-  const StyledRow = styled(Row)`
-    display: flex;
-    justify-content: center;
-  `;
-
-  const StyledRate = styled(Rate)`
-    font-size: 30px;
-  `;
-
-  const Overview = styled.p`
-    text-align: left;
-    font-size: 17px;
-  `;
-
-  const TrailerTitle = styled.h1`
-    margin-top: 50px;
-    font-size: 30px;
-  `;
 
   const imgUrl = `http://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
