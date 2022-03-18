@@ -8,8 +8,8 @@ function App() {
     <div className="App">
       <Router />
       <MessengerCustomerChat
-        pageId="100030477510943"
-        appId="1602695806755817"
+        pageId="110809101051972"
+        appId="143293964389622"
       />
     </div>
   );
