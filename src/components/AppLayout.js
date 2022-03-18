@@ -2,7 +2,6 @@ import { Layout } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import styled from "styled-components";
 import Header from "./Header";
-import { MessengerChat } from "react-messenger-chat-plugin";
 
 const StyledLayout = styled(Layout)`
   min-height: 100vh;
@@ -29,29 +28,6 @@ export default function AppLayout({ children, isBack }) {
         <Header isBack={isBack} />
         <StyledContent>{children}</StyledContent>
       </StyledLayout>
-      <MessengerChat
-        pageId="110809101051972"
-        language="ua_UA"
-        themeColor={"#F2F3G2"}
-        height={24}
-        loggedInGreeting="Hello logged in user!"
-        loggedOutGreeting="Hello stranger!"
-        autoExpand={true}
-        debugMode={false}
-        onMessengerShow={() => {
-          console.log("onMessengerShow");
-        }}
-        onMessengerHide={() => {
-          console.log("onMessengerHide");
-        }}
-        onMessengerDialogShow={() => {
-          console.log("onMessengerDialogShow");
-        }}
-        onMessengerDialogHide={() => {
-          console.log("onMessengerDialogHide");
-        }}
-      />
-      ;
     </>
   );
 }
