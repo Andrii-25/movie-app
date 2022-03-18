@@ -1,16 +1,15 @@
 import "antd/dist/antd.css";
+import { FacebookProvider, MessageUs } from "react-facebook";
 import "./App.css";
 import Router from "./Router";
-import MessengerCustomerChat from "react-messenger-customer-chat";
 
 function App() {
   return (
     <div className="App">
       <Router />
-      <MessengerCustomerChat
-        pageId="100079180404642"
-        appId="335988321915386"
-      />
+      <FacebookProvider appId="143293964389622">
+        <MessageUs messengerAppId="143293964389622" pageId="110809101051972" />
+      </FacebookProvider>
     </div>
   );
 }
