@@ -1,5 +1,6 @@
 import { Layout } from "antd";
 import { Content } from "antd/lib/layout/layout";
+import { FacebookProvider, MessageUs } from "react-facebook";
 import styled from "styled-components";
 import Header from "./Header";
 
@@ -23,9 +24,14 @@ const StyledContent = styled(Content)`
 
 export default function AppLayout({ children, isBack }) {
   return (
-    <StyledLayout>
-      <Header isBack={isBack} />
-      <StyledContent>{children}</StyledContent>
-    </StyledLayout>
+    <>
+      <StyledLayout>
+        <Header isBack={isBack} />
+        <StyledContent>{children}</StyledContent>
+      </StyledLayout>
+      <FacebookProvider appId="143293964389622">
+        <MessageUs messengerAppId="143293964389622" pageId="110809101051972" />
+      </FacebookProvider>
+    </>
   );
 }
